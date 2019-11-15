@@ -1,0 +1,9 @@
+We illustrate the approaches for model choice using data from the sales price of pre-owned
+VWGolf automobiles. Our goal is to model the relationship between the sales price in 1,000
+Euro (variable price) and the five explanatory variables “age of the car in months” (age),
+“kilometer reading in 1,000 km” (kilometer), “number of months until the next appointment
+with the Technical Inspection Agency” (TIA), “ABS brake yes/no” (extras1), and “sunroof
+yes/no” (extras2). Examinations of this kind play an important role in the context of hedonic
+price indices. In contrast to common price indices, hedonic price indices take quality
+differences of a product into consideration. This is especially of importance when dealing
+with product groups that undergo fast technological changes.

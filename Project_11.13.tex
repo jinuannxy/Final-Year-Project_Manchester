@@ -1,0 +1,1586 @@
+\documentclass[a4paper]{article}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{multirow}
+\usepackage{mathtools}
+\pagenumbering{roman}
+
+\newpage
+\pagenumbering{arabic}
+
+\begin{document}
+\title{Modelling the Sales Price of VWGolf automobiles and Examinations of related Hedonic Price Indices
+}
+\author{Xinyan Nie}
+\maketitle
+
+\newpage
+\tableofcontents
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                  1. introduction
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\section{Introduction}  \label{sec:intro}
+The paper will explore and model the linear relationship between the sales prices of pre-owned VW Golf automobiles and five characteristics. Which is to say that we want to examine the Hedonic Price Index of pre-used one branch of automobiles product by Hedonic Regression. 
+
+\noindent
+Why is Hedonic method? The Boskin Commission in 1996 asserted that there were biases in the price index: traditional matched model indexes can substantially overestimate inflation, because they are not able to measure the impact of peculiarities of specific industries such as fast rotation of goods, huge quality differences among products on the market, and short product life cycle. Hedonic indices can use the whole sample and chained indices refresh the sample on a regular basis. The Hedonic method uses regression to return the sales price of the automatics based on their characteristics and the dummy variables in the simplest form, based on the time period involved in the observation. It will be more useful to price measurement in markets with a rapid turnover of models which are resulted by decline in the automobiles quality or frequent technological changes.  
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                1.1 MLR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+\subsection{Multiple Linear Regression}
+Then back to regression analysis, we will use the multiple linear regression. Multivariate regression analysis is a method of establishing a predictive model for prediction by correlating two or more independent variables with a dependent variable. In the other words, this model has two main functions: one is to explain the relationship, and the other is to predict the future.When there is a linear relationship between the independent variable and the dependent variable, it is called multiple linear regression analysis.We assume a dependent variable be y and several explanatory variables be $x_1$, $x_2$, ..., $x_p$. The model can be expressed by 
+\begin{center}
+	\begin{equation*}
+	y= b_0+b_1x_1+b_2x_2+...+b_p x_p+\epsilon
+	\end{equation*}
+\end{center}
+Where $b_0$ to $b_p$ are p+1 unknown parameters. $b_0$ is a constant. $b_1$ to $b_p$ are partial regression coefficients of corresponding $x_1$ to $x_p$ to y separately. Taking $b_1$ as an example, $b_1$ is the increasing or decreasing value of y, when $x_1$ changes 1 unit with $x_2$ to $x_p$ fixed. $\epsilon$ is the random error, we often assume that
+\begin{equation*}
+	\begin{split}
+		E(\epsilon) & =0 \\
+	var(\epsilon) & =\sigma^2
+	\end{split}
+\end{equation*}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%                                   1.1.1 Assumption
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\subsubsection{Basic Assumptions of Multiple Linear Regression Model}
+Above all, we can see that the MLR is the extension of simple linear regression, hence it is also basic on the four principle assumptions :
+\begin{itemize}
+	\item Linearity——There must be a exist linear relationship between the response variables and explanatory variables.
+	\item Independence——There should be some mutual exclusion between explanatory variables, that is, the level of correlation between explanaroty variables should not be higher than the correlation between explanatory variables and response variables. Besides, the residuals should be independent with each other as well.
+	\item Normality——Residuals $\epsilon$ should be normally distributed with a mean of 0 and variance $\sigma$.
+	\item Equal (Constant) Variance ——the variance $\sigma$ of residuals should be a constant.
+\end{itemize}
+
+
+\noindent
+The first two are basing on the full model. Others two are focus on the random errors. The expectation 0 of error shows we assume that there is no systematic error in the observations. The covariance indicates that the random error term is irrelevant between different sample points, ie independent, there is no sequence correlation, and there is relative accuracy.
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                            1.1.2  Model and matrix notation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+\subsubsection{The Model}
+
+
+
+
+
+
+
+
+For a practical problem, if we get n sets of observations $(x_{i1},x_{i2},x_{i3},...,x_{ip};y_i)$ where i=1,2,...,n. The multiple linear regression model can be denoted as: 
+\begin{equation*}
+	\left\{
+	\begin{aligned}
+	y_1 & = \beta_0+x_{11}\beta_1+x_{12}\beta_2+...+x_{1p}\beta_p+\epsilon_1\\
+	y_2 & =\beta_0+x_{21}\beta_1+x_{22}\beta_2+...+x_{2p}\beta_p+\epsilon_2\\
+	... & ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... \\
+	y_n & =\beta_0+x_{n1}\beta_1+x_{n2}\beta_2+...+x_{np}\beta_p+\epsilon_n
+	\end{aligned}
+		\right.
+\end{equation*}
+
+\noindent
+We assume \textbf{Y}=$(y_1 \quad y_2 \quad ... \quad y_n)^T$——a column vector of n observations on dependent variable $y_i$.  \\[4pt]
+And the matrix  \textbf{X} is a $n\times(p+1)$ matrix called "Design Matrix" whose form is
+$$
+\left(
+\begin{matrix}
+1 & x_{11} & x_{12} & ... & x_{1p} \\
+1 & x_{21} & x_{22} & ... & x_{2p} \\
+... & ... & ... & ... & ... \\
+1 & x_{n1} & x_{n2} & ... & x_{np}
+\end{matrix}
+\right)
+$$
+Where $x_{ij}$ is the i-th observed value of j-th covariate.All of elements included matrix \textbf{X} are known constants.\\[4pt]
+We also denote parameters to be estimated as a (p+1)$\times$1 vector by \bm{$\beta$}=$(\beta_0 \quad \beta_1 \quad ... \quad \beta_p)^T$. $\beta_0$ is the intercept of linear regression model, also labeled as constant. It is the expected mean value of \textbf{Y} when all of observations of $x_{ij}$ = 0. $\beta_j$ is the partial regression coefficient reflecting the effect of the j-th independent variable changing one unit on the dependent variable, assuming that all other independent variables remain unchanged. They are different when they are estimated by different data set(independent variables set).\\[4pt]
+The random errors are denoted by a n$\times$1 vector \bm{$\epsilon$}=$(\epsilon_1 \quad \epsilon_2 \quad ... \quad \epsilon_n)^T$. We assume that $\epsilon_i$ are independent and identically distributed with mean 0 and variance $\sigma^2$.From the above assumptions about random errors, we can write
+\begin{equation*}
+	\left\{
+	\begin{aligned}
+	  &	E(\epsilon_i)=0, \quad i=1,2,...,n \\
+	  &	var(\epsilon_i)=\sigma^2,   \quad    i=1,2,...,n \\ 
+	  &	cov(\epsilon_i,\epsilon_j)=
+		\left\{
+		\begin{aligned}
+	 &	\sigma^2,    i=j \\
+	 &	0,               i \neq j
+		\end{aligned}
+		  \quad                               i,j=1,2,...,n
+		  \right.
+	\end{aligned}
+\right.
+\end{equation*}\\
+
+\noindent
+And now the multiple linear regression can be written as matrix form:
+\begin{center}
+	\begin{equation*}
+	\mathbf{Y}=\mathbf{X}\boldsymbol{\beta}+\boldsymbol{\epsilon}
+	\end{equation*}
+\end{center}
+From the assumption of random errors, we get
+\begin{equation*}
+	\begin{aligned}
+		E(\bm{\epsilon}) & =0 \\
+	var(\bm{\epsilon}) & =\bm{\sigma}^2 \textbf{$I_n$}
+	\end{aligned}
+\end{equation*}
+And since both matrix \textbf{X} as well as \bm{$\beta$} are constant matrices. We obtain that 
+\begin{equation*}
+	\begin{aligned}
+		E(\textbf{Y}|\textbf{X}) & = \textbf{X} \bm{\beta} \\
+	Cov(\textbf{Y}|\textbf{X}) & =\bm{\sigma}^2 \textbf{$I_n$}
+	\end{aligned}
+\end{equation*}
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%     \subsubsection{Normality}
+%     Since we assume :
+%     \begin{itemize}
+%     \item $\epsilon_i$ has 0 mean and variance $\sigma^, \quad i=1,2,...,n$ 
+%     \item $\epsilon_1$, $\epsilon_2$, ... , $\epsilon_n$ are independent with each other
+%     \end{itemize}
+%     We obtain that 
+%     \begin{equation*}
+%     \bm{\epsilon} \sim  N(0,\sigma^2\textbf{I}_n)
+%     \end{equation*}
+%     Basing on the matrix form of multiple linear regression model, random vector \textbf{Y} have n- dimension normal %  %     distribution. Hence we can obtain the expectation and variance of \textbf{Y}:
+%     \begin{equation*}
+%       \begin{aligned}
+%     	E(\textbf{Y}) & = \textbf{X} \bm{\beta} \\
+%     	var(\textbf{Y}) & = \sigma^2 \textbf{I}_n \\
+%     	\textbf{Y} & \sim N(\textbf{X} \bm{\beta},\sigma^2 \textbf{I}_n )
+%       \end{aligned}
+%     \end{equation*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%                 Estimation of Parameters and Model Fitting     
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\subsection{Estimation of Parameters and Model Fitting}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%               MVN distribution
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\subsubsection{Multivariate Normal Distribution}
+Primarily,  we will explain the multivariate normal distribution. Suppose $z_1$, $z_2$, ..., $z_n$ are independent normal random variables with mean zero and variance. Then the random vector \textbf{Z} = $(z_1 \quad z_2 \quad ... \quad z_n)^T$ is said to have a multivariate normal distribution with mean \textbf{0} =  $(0 \quad 0  \quad... \quad z_n)^T$ and variance-covariance matrix \textbf{$V_z$} = \textbf{I} $\sigma^2$. This is be written as \[\textbf{Z} \sim N(\textbf{0},\textbf{I} \sigma^2)\]
+
+
+\subsubsection{The Assumption of Normality and Maximum Likelihood Estimation}
+Till now, we always discussing with the Normality Assumption. However, the least squares estimate does not require normality. Even without normality, the least squares estimate is the best linear unbiased estimate (b.l.u.e.). They are optimal in the sense that the variance of all linear unbiased estimators is minimal. If it does have normality, the maximum likelihood estimator is derived using a criterion (called a likelihood function) that looks for those parameter values that may maximize the probability of acquiring a particular sample. (John O. Rawlings, Sastry G. Pantula, David A. Dickey 1998). \\
+
+\noindent
+In addition, basing on the definition of multivariate normal distribution(we will use MVN distribution to present it),  since 
+\begin{itemize}
+    \item $\epsilon_i$ are independent of each other
+    \item $\epsilon_i$ is a normal random distribution with mean 0 and variance $\sigma^2$
+\end{itemize}
+The same thing applies to \textbf{Y}
+\begin{itemize}
+    \item $Y_i$ are independent of each other
+    \item $Y_i$ is a normal random distribution with mean $\beta_0$+$\beta_1$ $x_{i1}$+$\beta_2$ $x_{i2}$+...+$\beta_p$ $x_{ip}$ and variance $\sigma^2$
+\end{itemize}
+We can say that both \textbf{Y} and \bm{$\epsilon$} have the specific distribution MVN distribution. And \textbf{Y} is a linear combination of \bm{$\epsilon$}. Then we can use Maximum Likelihood Estimation to estimate unknown parameters \bm{$\beta$} and $\sigma^2$.\\
+
+\noindent
+The first step is to find the likelihood function of \textbf{Y} which is
+\begin{equation*}
+	L(\textbf{Y};\bm{\beta},\sigma^2) = (2\pi)^{-\frac{n}{2}} (\sigma^2)^{-\frac{n}{2}} \exp (-\frac{1}{2\sigma^2} (\textbf{Y} - \textbf{X} \bm{\beta})^T (\textbf{Y} - \textbf{X} \bm{\beta}))
+\end{equation*}
+The log-likelihood function:
+\begin{equation*}
+	ln L= l = -\frac{n}{2} ln(2\pi) - n ln(\sigma) - \frac{1}{2\sigma^2} (\textbf{Y} - \textbf{X} \bm{\beta})^T (\textbf{Y} - \textbf{X} \bm{\beta})
+\end{equation*}
+Obviously, the only one part including \bm{$\beta$} is the last part of function, To maximum the lnL we need to minimum $(\textbf{Y} - \textbf{X} \bm{\beta})^T (\textbf{Y} - \textbf{X} \bm{\beta})$ which will obtain the \textbf{Normal equation} \[\hat{\bm{\beta}} = (\textbf{X}^T \textbf{X})^{-1} \textbf{X}^T \textbf{Y}\]
+Through the equation, we can obtain 
+\begin{equation*}
+    \begin{aligned}
+    E(\hat{\bm{\beta}}) & = E((\textbf{X}^T \textbf{X})^{-1} \textbf{X}^T \textbf{Y})=E((\textbf{X}^T \textbf{X})^{-1} \textbf{X}^T \textbf{X} \bm{\beta})=\bm{\beta}\\
+    Cov(\hat{\bm{\beta}}) & = Cov((\textbf{X}^T \textbf{X})^{-1} \textbf{X}^T \textbf{Y}) = (\textbf{X}^T \textbf{X})^{-1} \textbf{X}^T Cov(\textbf{Y}) \textbf{X}^T (\textbf{X}^T \textbf{X})^{-1}  = (\textbf{X}^T \textbf{X})^{-1} \textbf{X}^T \sigma^2 \textbf{I}_n \textbf{X}^T (\textbf{X}^T \textbf{X})^{-1} = \sigma^2 (\textbf{X}^T \textbf{X})^{-1}
+    \end{aligned}
+\end{equation*}
+Since \textbf{X} is a constant matrix, we can regard $(\textbf{X}^T \textbf{X})^{-1} \textbf{X}^T$ as a constant matrix. Then \bm{$\beta$} is a linear combination of the $N_n$(\textbf{X} \bm{$\beta$},$\sigma^2$ $\textbf{I}_n$) random independent variable \textbf{Y}. Hence, we can say $\hat{\bm{\beta}}$ has specific distribution 
+\begin{equation*}
+    \hat{\bm{\beta}} \sim N_{p+1}(\bm{\beta},\sigma^2(\textbf{X}^T \textbf{X})^{-1})
+\end{equation*}
+
+\noindent
+After estimation of regression coefficients, we can calculate the regression values and residuals of dependent variables. 
+
+\noindent
+Since \[\hat{y_i} = \hat{\beta_0} + \hat{\beta_1} x_{i1} + \hat{\beta_2} x_{i2} + ... + \hat{\beta_p} x_{ip}\] where i = 1,2,...,n \\
+We obtain \[\hat{\textbf{Y}}=\textbf{X} \hat{\bm{\beta}} =  \textbf{X} (\textbf{X}^T \textbf{X})^{-1} \textbf{X}^T \textbf{Y}\]
+We can see that because of the effect of $\textbf{X} (\textbf{X}^T \textbf{X})^{-1} \textbf{X}^T$, \textbf{Y} gets a hat. Sometimes, we denote $\textbf{X} (\textbf{X}^T \textbf{X})^{-1} \textbf{X}^T$ by \textbf{H} and call it "Hat Matrix". Then we do also obtain $\hat{\textbf{Y}} = \textbf{H} \textbf{Y}$.\\
+
+\noindent
+Now, let us turn to the residuals. We call $\hat{e}_i = y_i - \hat{y}_i$ as the residual of $y_i$ (i=1,2,...,n). And $\hat{\textbf{e}}$ = $(\hat{e}_1, \hat{e}_2, ..., \hat{e}_n)^T = \textbf{Y} - \hat{\textbf{Y}}$ is called the vector of regression residuals. 
+
+\noindent
+Substituting $\hat{\textbf{Y}} = \textbf{X} \hat{\bm{\beta}}$ into $\hat{\textbf{e}} =  \textbf{Y} - \hat{\textbf{Y}}$, we obtain $\hat{\textbf{e}} = \textbf{Y} - \textbf{X} \hat{\bm{\beta}}$. Then we denote $E(\hat{\textbf{e}})$ as the mean of $\hat{\textbf{e}}$.
+\begin{equation*}
+\begin{aligned}
+   E(\hat{\textbf{e}}) & = E(\textbf{Y}) - E(\textbf{X} \hat{\bm{\beta}}) = \textbf{X} \bm{\beta} - \textbf{X} E(\hat{\bm{\beta}}) = \textbf{X} \bm{\beta} - \textbf{X} \bm{\beta} \\
+   & = \textbf{0}
+\end{aligned}
+\end{equation*}
+
+\noindent
+Substituting $\hat{\textbf{Y}} = \textbf{H} \textbf{Y}$ into $\hat{\textbf{e}} =  \textbf{Y} - \hat{\textbf{Y}}$, we obtain $\hat{\textbf{e}} = \textbf{Y} - \textbf{HY} = (\textbf{I} - \textbf{H}) \textbf{Y}$. Then we denote $cov(\hat{\textbf{e}}) = (cov(\hat{e}_i, \hat{e}_j))_{n \times n}$ as the covariance matrix of $\hat{\textbf{e}}$.
+\begin{equation*}
+\begin{aligned}
+cov(\hat{\textbf{e}}) & = cov((\textbf{I} - \textbf{H}) \textbf{Y}, (\textbf{I} - \textbf{H}) \textbf{Y}) \\ 
+& = (\textbf{I}-\textbf{H})cov(\textbf{Y} \textbf{Y})(\textbf{I}-\textbf{H})^T \\
+& = \sigma^2 (\textbf{I}-\textbf{H}) \textbf{I}_n (\textbf{I}-\textbf{H})^T \\
+& = \sigma^2 (\textbf{I}-\textbf{H})
+\end{aligned}
+\end{equation*}
+
+
+
+\noindent
+The next step is to get MLE of $\sigma^2$.
+\begin{equation*}
+\begin{aligned}
+	\frac{dlnL}{d\sigma^2} & = -\frac{n}{2\sigma^2} + \frac{1}{2\sigma^4} (\textbf{Y} - \textbf{X} \hat{\bm{\beta}})^T (\textbf{Y} - \textbf{X} \hat{\bm{\beta}}) = 0 \\
+	 \rightarrow \hat{\sigma^2}_{ML} & = \frac{1}{n} \hat{\textbf{e}}^T \hat{\textbf{e}} = \frac{RSS}{n}
+\end{aligned} 
+\end{equation*}
+Now we can see that we obtain a biased estimator of $\sigma^2$ whose divisor is n. In practice, it is better to use the unbiased estimator \[\hat{\sigma^2} = \frac{RSS}{n-p-1}\] where RSS is residual sum of squares.\\
+For the large sample size n, there is not much difference between the above of two, so this article will use the unbiased one. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+%                               Analysis
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%                               data description
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+	
+\section{Data Description}
+The data used in this paper involve 172 groups (n=172) data including the VWGolf automobiles sales price in thousands and the following five explanatory variables (p=5):
+\begin{equation*}
+\begin{aligned}
+X_1 &= \text{age of cars in months (age) }\\[4pt]
+X_2 &= \text{kilometer reading in 1000 km (kilometer)} \\[4pt]
+X_3 &= \text{number of months until the next appointment with the Technical Inspection Agency (TIA)} \\[4pt]
+X_4 &=\text{ABS brake yes/no (extras1)} \\[4pt]
+X_5 &= \text{sunroof yes/no (extras2)}
+\end{aligned}
+\end{equation*}
+The dependent variable Y is sales price of pre-owned VW Golf automobiles in thousand. We noticed that we get two categorical variables ----- ABS brake yes or not and sunroof yes or not. Therefore, we can express the categorical variables as two single dummy variable ($X_4$ and $X_5$) respectively, like so:
+\begin{itemize}
+    \item $X_4$ = 1 if the automobile with ABS brake \quad  \quad $X_4$ = 0 if the automobile without ABS brake
+    \item $X_5$ = 1 if the automobile with sunroof \quad  \quad \quad $X_5$ = 0 if the automobile without sunroof
+\end{itemize}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%
+%%%%%
+%%%%%    Plotting response against each xj
+%%%%%
+%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Exploratory Data Analysis}
+
+
+\subsection{Numerical Variables}
+Since we want to explore the sales price. We will look at the prices data first. The summary results of Table 1 indicates that prices of all observations are ranged by $\pounds$1450 to $\pounds$7300. More observations are focused on a lower price. 75\% automobiles are sold by a price lower than $\pounds3960$. The price range is a regular set and we needn't to drop off any observations.\\   
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{cc}
+    \toprule
+         &  Price (in thousands) \\
+    \midrule
+        Min  &  1.450 \\ 
+         1st Qu.  &  2.450 \\ 
+          Median  &  3.100 \\ 
+           Mean  &  3.397 \\ 
+            3rd Qu.  &  3.960 \\ 
+             Max  &  7.300 \\ 
+    \bottomrule
+    \end{tabular}
+    \caption{Descriptive Statistics Table of Sales Price of Pre-owned Automobiles}
+    \label{tab:my_label}
+\end{table}
+
+\noindent
+Then, we plot the response sales Price against the each of covariances to explore possible relationships. Figure 1 is plotted by \textbf{scatterplotMatrix} in \textbf{\textit{car}} package. The output shows us a symmetrical plot matrix on which we will focus diagonal plots and rest 3 plots of top panel in upper triangular matrixes. \\
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=10.5cm]{project/figures/sandian3.pdf}
+    \caption{Scatter Plot for Numerical Variables}
+    \label{1}
+\end{figure}
+
+\noindent
+The four diagonal plots draw Adaptive Kernel Density Estimates of the 4 numerical univariates. It is a non-parametric estimation way to estimate the probability density of an univariates without underlying distribution. The kernel density estimator is 
+\begin{equation*}
+    \hat{f_h}(x) = \frac{1}{n} \sum_{i=1}^{n}K_h(x-x_i)=\frac{1}{nh} \sum_{i=1}^{n} K \large{(}\frac{x-x_i}{h} \large{)}
+\end{equation*}
+The normal kernel is used so $K_h(x)=\phi(x)$ which is the standard normal density function.\\
+
+\noindent 
+From the price plot we can see that the plot is a roughly normal distributed with left-skewed which is to say that sales prices are concentrate on lower price where is similar results as the Table 1 above and peak at $\pounds3000$. While by R table function, we find three peaks at $\pounds2400$, $\pounds2900$, $\pounds3200$. We perhaps consider that both sellers and buyers would like to accept the price between $\pounds2000$ and $\pounds4000$, especially near $\pounds3000$. While the extreme low or high price do also exist.\\
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{cc}
+    \toprule
+         &  Age (in months) \\
+    \midrule
+        Min  &  65.00 \\ 
+         1st Qu.  &  99.75 \\ 
+          Median  &  115.00 \\ 
+           Mean  &  113.19 \\ 
+            3rd Qu.  &  129.00 \\ 
+             Max  &  142.00 \\ 
+    \bottomrule
+    \end{tabular}
+    \caption{Descriptive Statistics Table of Age of Pre-owned Automobiles}
+    \label{tab:my_label}
+\end{table}
+
+\noindent
+Age (in months) of observations are above 65 months (more than 5 years) and below 142 months (approximate 12 years) and reach the highest proportion at 133 months. Before reaching the peak, the older the automobiles are, the more they are sold. We can guess: from the seller's point of view, in the fifth year of owning the automobiles, people began to have the willingness to sell the "new car"; and from the buyer's point of view, people are not willing to buy automobiles older than 12 years. Most of automobiles (more than 75\%) are sold have a higher age than 8 years (96 months). \\
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{cc}
+    \toprule
+         &  Kilometers Reading (in 1000km) \\
+    \midrule
+        Min  &  10.0 \\ 
+         1st Qu.  &  107.0 \\ 
+          Median  &  130.8 \\ 
+           Mean  &  134.7 \\ 
+            3rd Qu.  &  167.5 \\ 
+             Max  &  250.0 \\ 
+    \bottomrule
+    \end{tabular}
+    \caption{Descriptive Statistics Table of Kilometers Reading of Pre-owned Automobiles}
+    \label{tab:my_label}
+\end{table}
+
+\noindent
+The Kilometer plot shows us a approximate symmetrical and roughly normal distributed graphic. The kilometer reading of all observations are under 260,000km. The number of automobiles with 119,000km reading is the largest. Compared with Table 3, we obtain a little left-tail which is not obvious in plot. We may think that more people prefer more reliable car which will last more before the major repair. Beside we do also find that this is a linearity between the age and kilometers reading of automobiles. With the increasing of ages, the kilometers reading keep increasing as well. This is just like what we know in reality. As consumable goods, automobiles are bought for using rather than collection or investment (which we will discuss later).\\
+
+\begin{table}[!htb]
+    \centering
+    \begin{tabular}{cc}
+    \toprule
+         &  TIA (in months) \\
+    \midrule
+        Min  &  0.00 \\ 
+         1st Qu.  &  11.00 \\ 
+          Median  &  19.00 \\ 
+           Mean  &  16.98 \\ 
+            3rd Qu.  &  24.00 \\ 
+             Max  &  26.00 \\ 
+    \bottomrule
+    \end{tabular}
+    \caption{Descriptive Statistics Table of TIA of Pre-owned Automobiles}
+    \label{tab:my_label}
+\end{table}
+
+\noindent
+Till now, first three plots are single peak plots while the plot of TIA has two peaks. Besides, column-shape distribution shows us the values of TIA are discrete instead of continuous. From WIKIPEDIA, \textit{vehicle safety inspection and emissions inspection are governed by each state individually. 15 states have a periodic (annual or biennial) safety inspection program, while Maryland and Alabama require a safety inspection on sale or transfer of vehicles which were previously registered in another state}. From above information, we obtain 2 main idea. Since inspection should be hold each one or two years, and some states are only required when registration and transformation. The range of values are between 0 to 26 months. Before the ownership transferring, an inspection should be hold. Hence there are two peaks around 12 and 24. The density of TIA between 12 to 26 months are higher than it between 0 to 12 months. We may think more states are require a biennial safety inspection. Furthermore, by the density of values which are focus on 10 and 24, we might guess when people want to resale an automobiles, they prefer to take an inspection immediately to measure the price by the result. \\
+
+\subsubsection{Loess Regression}
+Next we turn to the left 3 plots on the top panel. All of them have the same y-axis——Price. The x-axes from left to right are age, kilometer, and TIA respectively. These three plots show us the relationship of 3 group bivariate. Besides scatters, there are 2 lines in each of plot. They are best fitted linear line(Green Solid Line) and smooth regression line(Red Dotted Line). The default method of smooth is \textbf{loessline}. Now we will discuss a new definition \textit{\textbf{Loess Regression}}.\\
+
+\noindent
+LOESS Model, which is proposed by \textit{Savitsky} and \textit{Golay} in 1964, is commonly referred to as Savitzky–Golay filter. In 1979 \textit{Cleveland} rediscovered the method and gave it a distinct name. Then, it is further developed by \textit{Cleveland} and \textit{Devlin} in 1988 and is also known as locally weighted polynomial regression now.\\
+
+\noindent
+During estimation, each point in the range of the data set a low-degree polynomial is fitted to a subset of the data, with explanatory variable values near the point whose response is being estimated. The polynomial is fitted using weighted least squares, giving more weight to points near the point whose response is being estimated and less weight to points further away. The value of the regression function for the point is then obtained by evaluating the local polynomial using the explanatory variable values for that data point. The LOESS fit is complete after regression function values have been computed for each of the n data points.\\
+
+\noindent
+By our computation in R, we use the default span (which is known as smoothing parameter) = $\frac{2}{3}$ as the proportion of sample size to use for estimate response. And we will find the nearest $k=172 \times \frac{2}{3}$ points to closet a local neighborhood near the $y_i$ we want to estimate. The weight for the jth point in the neighborhood is defined by $w_i = (1-(d_j-D)^3)^3$ where D the maximum distance in the neighborhood and $d_j$ is the distance from the jth points to $y_i$. Then we use weight least square to estimate $y_i$. \\
+
+\noindent
+By the definition and computation process above, we could think that the loess curves fit a model to all observations in dataset. Hence, we will compare them with best fitted linear line to discuss the linearity between each numerical covariate and response respectively and analyse why the situation exists.\\
+
+\noindent 
+Now turing to left 3 plots of top panel, we can see that there existing negative-relationship between the price and age or kilometer respectively. Which is to say that, with the increasing of age of cars and kilometers reading, the sales price will decrease. Actually, it is not difficult to think that newer automobiles and less kilometers reading are usually in better condition. The buyer of those products can generally last for a longer time before it requires major repairs. This means that they can enjoy a lower cost of ownership, and a more reliable car that won’t require constant maintenance(Ride Time 2017). As a rule, those product will be more expensive. We do also can see here, on large price level, prices modeled by weighted regression are higher than price estimated by linear regression. And on the small price level, the weighted regression ones are lower than estimated price. Why does this situation exist? Basing the rule we mentioned, people prefer to buy the low kilometers automobiles which give them a large market and result in the product premium. For high ages and kilometers automobiles, people think there is more risk to buy them. To avoid risk, the market of high age and kilometer vehicles becomes smaller and smaller and the goods will be much cheaper. There is no obvious relationship between the price and TIA. \\
+
+\subsection{Categorical Variables}
+Then we will explore relationship of response price against two categorical variables.
+\begin{table}[!htb]
+\centering
+\begin{tabular}{c|cc|cc|c}
+\toprule
+          & \multicolumn{2}{l}{Yes} & \multicolumn{2}{l}{No} & \multirow{2}{*}{Total} \\
+          & Count    & Proportion   & Count   & Proportion   &                        \\
+\midrule
+ABS Brake & 118      & 68.60\%      & 54      & 31.40\%      & 172                    \\
+Sunroof   & 129      & 75.00\%      & 43      & 25.00\%      & 172                    \\
+\bottomrule
+\end{tabular}
+    \caption{Table of Categorical variables}
+    \label{tab:my_label}
+\end{table}
+
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[height=11cm,width=13cm]{project/figures/boxplot2.pdf}
+    \caption{Boxplot of Categorical Variables}
+    \label{2}
+\end{figure}
+
+\noindent
+From the Table 5, the automobiles with ABS are more than without it. The situation of Sunroof is similar. Combining the boxplots of price against both of them, we noticed that both of two plots have two extreme different boxes seperately. 
+\begin{table}[!htb]
+\centering
+\begin{tabular}{c|c|cc}
+\toprule
+                       &         & 0(without ABS) & 1(with ABS) \\
+\midrule
+\multirow{6}{*}{Price} & Min.    & 1450           & 1555        \\
+                       & 1st Qu. & 2400           & 2600        \\
+                       & Median  & 2625           & 3200        \\
+                       & Mean    & 3454           & 3370        \\
+                       & 3rd Qu. & 4425           & 3938        \\
+                       & Max     & 7000           & 7300        \\
+\bottomrule
+\end{tabular}
+    \caption{Descriptive Statistics Table of Price basing on ABS Brake or not}
+    \label{tab:my_label}
+\end{table}
+
+\begin{table}[!htb]
+\centering
+\begin{tabular}{c|c|cc}
+\toprule
+                       &         & 0(without sunroof) & 1(with sunroof) \\
+\midrule
+\multirow{6}{*}{Price} & Min.    & 1700          & 1450        \\
+                       & 1st Qu. & 2550          & 2400        \\
+                       & Median  & 3000           & 3100        \\
+                       & Mean    & 3649          & 3312        \\
+                       & 3rd Qu. & 4875          & 3900        \\
+                       & Max     & 6600           & 7300        \\
+\bottomrule
+\end{tabular}
+    \caption{Descriptive Statistics Table of Price basing on Sunroof or not}
+    \label{tab:my_label}
+\end{table}
+
+\noindent
+Beginning with the Price against ABS Brake, the median price of automobiles with ABS is obvious far larger than without ABS. While the mean price is opposite——the average price of automobiles without ABS is higher. Both of two situations are right-tailed distributed. Non-ABS box is more serious right-skew although there are 3 outliers included by ABS. The reason can be showed by the interquartile range boxes in different color representing the middle of 50\% of the data. Although the number of ABS is more than no ABS, while the distribution of ABS is more concentrated than non-ABS. 50\% of non-ABS are distributed in a small range and the other 50\% of them are scattered in a wide range. In addition, the maximum and minimum whiskers are belongs to non-ABS as well. Thus from the left boxplot in Figure 2 and Table 6 we can conclude that the price of most of automobiles without ABS in market is low while beside few extreme abnormal observations the price of automobiles with ABS is more evenly distributed from low price to high price. \\
+
+\noindent
+Next, we discuss the Price against Sunroof or not. The median price of vehicle with sunroof and without sunroof is closed. While the mean, maximum whisker and minimum whisker of non-sunroof are larger than them of sunroof. It seems that the automobiles with sunroof is cheaper than non-sunroof which is unreasonable actually. We guess those outliers with high                                                                                                                                                                                                                                                                                                                                                                                                        price result it. Overall, the similar situation of right-skewed trend appears. Prices are concentrated on a lower price no longer whether the automobile has sunroof or not. The impact of this factor on price is not significant.
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Multiple linear Regression Modelling and Analysis}
+\subsection{Model Fitting}
+At the beginning,  we assume the sales price, Y, can be predicted by linear relationship with five explanatory variables as well as an intercept. Which is to                                                                                                                                                                               say, the model ca                           n be written by 
+\begin{center}
+	\begin{equation*}
+	\mathbf{Y}=\mathbf{X}\boldsymbol{\beta}+\boldsymbol{\epsilon}
+	\end{equation*}
+\end{center}
+\textbf{Y} ($172 \times 1$) is the column vector of sales price, \textbf{X} ($172 \times 6$) is a matrix including a column vector of ones and five column vectors of data for above independent variables $X_1$ to $X_5$. Both of them are from observed data. We will find the parameters vector \textbf{$\beta$}=$(\beta_0 \quad \beta_1 \quad \beta_2 \quad \beta_3 \quad \beta_4 \quad \beta_5)^T$.
+According to two assumptions of independence of errors and equal variance we mentioned before, the  $\epsilon$ will be assumed to be normally distributed, $\epsilon \sim$ $N_{172}$(\textbf{0},\textbf{I$\sigma^2$}).\\
+
+\noindent
+We will use R to fit the regression model.
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=12cm,height=8cm]{project/figures/lm1summary.png}
+    \caption{Summary Output}
+    \label{3}
+\end{figure}
+
+\noindent
+Firstly, we look at the \textbf{coefficient of determination} $R^2$ which is ranged by [0,1]. It represent the percentage of covariates (model) explained.
+\begin{equation*}
+    R^2=1-\frac{\sum(\hat{(y_i)}-y_i)^2}{\sum(y_i-\overline{y})^2}
+\end{equation*}
+Ideally, we hope $R^2$ be more closer to 1 or even equal to 1. While in social science, we may prefer a lower value because of a lot of noise(Julian J.Faraway 2002). We use the output of $R^2$ = 0.6231 in Figure 1 directly. This value is considered good by our report. 
+
+\noindent
+Then, going to the p-value of F Test, which is far less than 0.05, we do also think the model basing on 5 dependent variables are significance.
+
+\noindent
+ We do also try the model with 4,3,2 variables(without extras2, extras2 and TIA, extras2 and TIA and extras1) respectively. The outputs show little difference results of F-test(p-value $<$ 2.2e-16) and a decreasing $R^2$ from 0.6231 to 0.6151. In summary, although we can see that there are 3 independent variables not significance for response, we cannot drop them directly.
+
+\noindent
+Now, we are back to the estimate regression coefficients.
+\begin{center}
+\begin{tabular}{cccccc}
+\toprule
+$\beta_0$&$\beta_1$&$\beta_2$&$\beta_3$&$\beta_4$&$\beta_5$\\
+\midrule
+9.311171& -0.038329&-0.009742&-0.005483&-0.237664&-0.009862\\
+\bottomrule
+\end{tabular}
+\end{center}
+According to them we gain a initial full model
+\[Y=9.311171-0.038329X_1-0.009742X_2-0.005483X_3-0.237664X_4-0.009862X_5\]
+The output can be interpreted by that if other variables remaining constant, how the price changes with the change with per unit change of corresponding covariance.Let us begin with the sales price, it will decreases by  \pounds 38.39 if the age of automobile increases by one more month. This one is not difficult to understand that nobody would like to pay more for consumable product. The price will decreases by \pounds9.74 if the kilometer reading increases by 1000 km, the reason of this correlation is a little bit similar as the age of automobile. More kilos mean more tire wear, more engine damage and less life of one automobile. Two of above are most significant variables for price.  The following 3 variables are not-significant variables for price. While we cannot ignore the influence from them. We can see that price will decreases by  \pounds 5.48 if the number of months until next appointment with TIA increases by one. Through checking the database, we know that having ABS brake($X_4$=1) and having sunroof($X_5$=1) are reference groups, which is to say that the price do also will decrease by \pounds234.66 and \pounds9.86 separately if the automobile doesn't have ABS brake($X_4$=0) or sunroof($X_5$=0).\\
+
+
+
+
+
+
+\section{Residuals and Residual Analysis}
+Till now, we get a basic model related sales price and other five variables. How can we evaluate this model? Does this model satisfy all assumptions? We will measure them by some figures.\\
+
+
+
+\subsection{Residuals Plot and Nonlinearity}
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=11cm]{project/figures/RvsF.pdf}
+    \caption{Residuals vs Fitted}
+    \label{4}
+\end{figure}
+
+
+\noindent
+The residuals in Figure 2 show light quadratic trend, indicating that the regression model does not capture some of the nonlinear characteristics of the data. The red line is \textbf{Lowess Curve} which is based on similar principle of \textbf{Loess Curve} we mentioned before. The smoother regression line shows us the violation of assumption that the residuals are N(0,1) distributed. The variance on both small price and large price are high. To explain this situation, we go back to figures we discussed before. In scatter plot, we get higher observations and lower fitted values on large price level as well as lower observations and higher fitted value on small price level. We consider there are a few outliers on both small and large price. In categorical variables boxplots, it is obvious that outliers appear on high price.\\
+
+
+
+
+
+\subsection{Normality of Residuals}
+\subsubsection{Standardized Residuals}
+Considering the residuals $e_i=y_i - \hat{y_i}$ have unequal variances because Var($\hat{e_i}$) depends on the value of observations $x_i$. We will introduce a definition \textbf{Standardized Residuals} which is also called \textbf{Internal Studentized Residuals}. It is defined by
+\begin{equation*}
+        r_i = \frac{y_i-\hat{y_i}}{s\sqrt{1-h_{ii}}} \quad i=1,2,... n
+\end{equation*}
+Recall that $h_{ij}$ is the element of hat matrix.
+\begin{equation*}
+        h_{ij} = {\textbf{x}_i}^T (\textbf{X}^T\textbf{X})^{-1}{\textbf{x}_j}^T
+\end{equation*}
+where ${\textbf{x}_i}^T$ and ${\textbf{x}_j}^T$ are the i-th and j-th rows of \textbf{X}
+There are some properties of standardized residuals.
+\begin{itemize}
+    \item E($r_i$)=0 while $\sum r_i \neq 0$
+    \item Var($r_i$) = 1 and be independent of $\sigma^2$ and the $h_{ii}$
+    \item Cov($r_i$, $r_j$) = Cov($e_i$, $e_j$)
+    \item The $r_i$ are slightly correlated with the fitted values
+    \item The distribution of $r_i$ is a monotonic transformation of the student's t-distribution. It approximates a N(0,1) random variables.
+\end{itemize}
+
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=12cm]{project/figures/StdRvsF.pdf}
+    \caption{Standardized Residuals vs Fitted}
+    \label{5}
+\end{figure}
+
+\noindent
+From the Figure 3, we can see that the quadratic trend is still existing. This time, we use the \textit{loess} function in R to do smoother of response standard residuals and predictor fitted values. We use \textit{loess()} function creates an object that contains the results, and the \textit{predict()} function retrieves the fitted values. These can then be plotted along with the response variable. Using \textit{lines()} function we apply to fitted values in increasing order for the \textit{lines()} to draw the line in an appropriate fashion. Removing the impact of predictors observations, the high variance on small and high price level still existing. Later, we need to find the specific outliers. \\
+
+
+
+
+%\noindent
+%Standardized residual is the residual divided by its standard deviation. If random error is normal distributed, Standardized %residuals should be normal distributed and 95\% of them distribute between (-2,2).
+%\begin{figure}[!htb]
+%	\centering
+%	\includegraphics[width=13cm]{stares.pdf}
+%	\caption{5-Variables}
+%	\label{4}
+%\end{figure}
+%According to Figure 5, we notice that there are some outliers that are out of range (-2,2).\\
+
+\subsubsection{Examination of Normality}
+To test the normality of residuals, we firstly introduce the  \textbf{Kolmogorov–Smirnov Test}. K-S test is a hypothesis test method that compare a distribution f(x) with a theoretical distribution g(x) or two observations. The null hypothesis $H_0$ : Both of observations have the same distribution or the f(x) conforms to the theoretical distribution g(x). Now we will test if the standardized residuals satisfy N(0,1). After some calculation in R, we compare 172 standardized residuals with 172 random values from N(0,1). We get small D-value=0.0523 $>$ 0.05 and a large p-value = 0.9726. Hence we have no  significant evidence against null hypothesis and so, under null hypothesis we can regard the standardized residuals as a random sample from the N(0,1) distribution.\\[4pt]
+
+\noindent
+To examine the normality of standardized residuals, we do also use the qqplot. From the Figure 5 we can see that the plot of standardized residuals is close to a straight line, so we can obtain that the residuals are excellent normally distributed. While there are several obvious outliers.
+\begin{figure}[!htb]
+	\centering
+	\includegraphics[width=10cm]{project/figures/QQ.pdf}
+	\caption{qqplot}
+	\label{6}
+\end{figure}
+
+\noindent
+
+
+
+
+
+
+
+
+
+
+
+\section{Outliers and High Leverages}
+\subsection{Outliers and Studentized Residuals}
+An outlier, also known as an escape value, means that one or more observations' response values in the sample does not follow the general trend of the rest of the data significantly . Inconsistent values are located by identifying the corresponding residual as unusually large (positive or negative).(Peter K. Dunn,Gordon K. Smyth,2017). Hence, we will focus on the residuals.\\
+
+\noindent
+Since raw residuals have non-constant variance, we will use the standardized residuals firstly. From the QQ-plot above, we can find three outliers here. \\
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=10cm]{project/figures/stares.pdf}
+    \caption{Standardized Residuals Plot}
+    \label{7}
+\end{figure}
+
+\noindent
+In the previous plots we find that the sample has some cases being outliers. Firstly, we will to find their origin variables by boxplot. From the Figure 6, we can find two outliers. While we still cannot make sure the specific cases.
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=10cm]{project/figures/Std.pdf}
+    \caption{Standardized Residuals vs Price}
+    \label{8}
+\end{figure}
+
+
+
+
+
+\subsubsection{Studentized Residuals---Outlier in the Y-space}
+Besides the standarzied residuals, we will also introduce External Studentized Residuals, whose general form is given as\\
+\begin{equation*}
+    r_{(i)} =\frac{y_i-\hat{y_{i}}}{s_{(i)}\sqrt{1-h_{ii}}}   
+\end{equation*}
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=12cm]{project/figures/stu.pdf}
+    \caption{Studentized Residuals Plot}
+    \label{9}
+\end{figure}
+
+\noindent
+The biggest difference between standardized residuals and studentized residuals is $s_{(i)}$. It is unbiased standard error of the estimated residuals without the $i^{th}$ observation. Usually, the $r_{(i)}$ is believed that it follows approximately student's t distribution with n-p-2 degrees of freedom. Hence we will compare the $r_{(i)}$ where i=1,2,...,172 with critical values of the student's t-ratio with df=172-5-2=165.\\
+
+\noindent
+From the Figure 9, we can see that if we choose 0.99 as the critical value. There are 4 outliers. We do also find the specific cases correspondingly.
+\begin{table}[!htb]
+\centering
+\begin{tabular}{cccccccc}
+\toprule
+$r_{(i)}$ & Case i & Price & Age & Kilometer & TIA & Extras1 & Extras2 \\
+\midrule
+-3.215     & 25     & 2.5   & 89  & 85        & 19  & 0       & 1       \\
+-2.5467    & 80     & 2.0   & 98  & 128       & 25  & 1       & 1       \\
+2.4492     & 26     & 6.5   & 97  & 87        & 14  & 0       & 1       \\
+3.6948     & 35     & 6.6   & 113 & 98        & 25  & 0       & 1       \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent 
+Till now, we find all of three outliers showed in qqplot before and gain one more. How do they affect the residuals? Let us find them on scatter plot. To make sure how does each of case affect residuals, we find them from 3 bivariate plot and 2 boxplots. We find both case 25 and 80 have lower observation prices against corresponding 5 pridictors. The scatter of them in numerical plot are much lower than fitted linear line. The price of case 25 in two boxplots are closed to 25 percentile line and the price of case 80 in two boxplots are out of the interquartile range. Hence, prices of these 2 cases are record or priced much low. Contrary to them, the case 26 and 35 are much expensive than the value estimated according to their age, kilometer reading and rest 3 predictors. 
+
+
+
+
+\subsection{High Leverages---Outlier in the X-space}
+For simplicity, we will consider the situation of unweighted regression for \textbf{W}=\textbf{$I_n$}. Let us back to the Hat Matrix we mentioned before which is denoted by \textbf{H} = $\textbf{X} (\textbf{X}^T \textbf{X})^{-1} \textbf{X}^T$. The leverages $h_i$ are the diagonal elements $h_{ii}$ of \textbf{H}.\\
+\begin{figure}[!htb]
+    \centering
+    \includegraphics{project/figures/values.pdf}
+    \caption{Leverages Plot}
+    \label{11}
+\end{figure}
+
+\noindent
+By some calculating, we can gain the mean of hat values\[\overline{h}=\frac{k+1}{n}\] where k is the trace of hat matrix. By calculation, $\overline{h}$ is 0.0349. All of leverages are included by $3\overline{h}$ and there are 4 "high leverages" if we compare them with $2\overline{h}$. \\
+
+\noindent
+A data point has high leverage if it has "extreme" predictor x values. With multiple predictors, extreme x values may be particularly high or low for one or more predictors, or may be "unusual" combinations of predictor values (e.g., with two predictors that are positively correlated, an unusual combination of predictor values might be a high value of one predictor paired with a low value of the other predictor)(STAT 462 Iain Pardoe). \\
+
+\noindent                                                                                                                                                               
+Using by R, we get the specific case corresponding 4 high leverages. The four largest leverages are:
+\begin{table}[!htb]
+\centering
+\begin{tabular}{cccccccc}
+\toprule
+h-value & Case i & Price & Age & Kilometer & TIA & Extras1 & Extras2 \\
+\midrule
+0.0972  & 167    & 3.80  & 78  & 223.0     & 25  & 0       & 1       \\
+00811   & 3      & 2.95  & 127 & 43.0      & 6   & 0       & 1       \\
+0.0737  & 60     & 4.50  & 134 & 116.7     & 0   & 0       & 1       \\
+0.0714  & 18     & 6.50  & 78  & 77.0      & 6   & 0       & 0       \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+Finding them from plots above again, we find: for case 3, the kilometer reading is in a extreme low value and TIA is in a high value than fitted; for case 18, all of values of predictors are much higher than fitted; for case 60, the values of age and TIA are higher and the value of kilometers reading are lower; for case 167, the value of age is much lower and the value of kilometer reading is much high.                     . 
+
+
+
+\section{Influential Observations}
+After discussing large residuals as well as high leverages, we will turn to influential observations. They are observations that "cannot" be removed. The fitted model will be influenced when those observations are omitted from the sample. The following diagnostics method are used to find influential observations. 
+
+
+
+
+\subsection{Cook's Distance}
+Cook’s distance, introduced by American statistician R Dennis Cook in 1977, is used to identify influential data points. It depends on both the residual and leverage. As above, it takes it account both the x value and y value of the observation. The computation process of cook's is closed to studentized which delete every observations at a time, refit the regression model on remaining n-1 observations, examine how much all of the fitted values change when the ith observation is deleted, finally get n cook's distances. \\
+\begin{equation*}
+    D_{(i)}=\frac{e_i^2}{ps^2}\large{[}\frac{h_{ii}}{(1-h_{ii})^2}\large{]}=\frac{r_{(i)}^2}{k}(\frac{h_{ii}}{1-h_{ii}})
+\end{equation*}
+
+\noindent
+From the equation, D-values are relative with studentized resiudals as well as leverages. When the residual of case i $e_i$($r_{i}$) is high, we obtain high $e_i^2$($r_{(i)}^2$ which results in high D-value. When the leverage of case i $h_{ii}$ is high, we obtain small $1-h_{ii}$ as well as high D-value.\\
+
+
+
+\noindent
+A data point having a large cook’s distance indicates that the data point strongly influences the fitted values.\\
+\begin{figure}[!htb]
+   \centering
+    \includegraphics{project/figures/StdRvsL167.pdf}
+    \caption{Residuals vs Leverage}
+    \label{fig:my_label}
+\end{figure}
+
+\noindent
+Figure 13 will help us complete the initial search of influential observations. If the case is not within the Cook distance (meaning they have a high Cook distance score), then these cases will affect the regression results significantly. If we exclude these situations, the regression results will change. In R, the default cook.level by default 0.5 and 1-----By definition, \[D_i = \frac{(\beta_{(i)}-\beta)'X'X(\beta_{(i)}-\beta)}{kX'Xs_{res}}\] which looks like F(k,n-k) distributed. Since $F_{0.5}(k,n-k) \approx 1$, we may think for those case with $D_i > 1$, removing observation i would turn the OLSE set $\beta_{(i)}$ based on dataset without ith observation to the boundary of an approximate 50\% confidence region for OLSE set $\beta$ from the whole dataset. Hence observation i would be consider as a influential point. From the Figure 11, we can see that: both Case 25 and Case 35 have high studentized residuals and low leverages; while Case 60 has both high residuals and leverages; Case 167 has obvious high leverage with extremely low residual. Then we plot all of cook's distances of model we fitted. \\
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=14cm]{project/figures/cook.pdf}
+    \caption{Cook's Distance}
+    \label{fig:my_label}
+\end{figure}
+
+\noindent
+Due to Chatterjee and Hadi, in Figure 12 we use the size-adjusted cutoff for Cook's D: \[D_i > \frac{4}{n-k-1}\] 
+ We get the specific case corresponding several high cook's distances which are labelled by Figure 13 as well. 
+\begin{table}[!htb]
+\centering
+\begin{tabular}{cccccccc}
+\toprule
+Cook's D & Case & Price & Age & Kilometer & TIA & Extras1 & Extras2 \\
+\midrule
+0.0314   & 1    & 7.300 & 73  & 10.0      & 12  & 1       & 1       \\
+0.0283   & 3    & 2.950 & 127 & 43.0      & 6   & 0       & 1       \\
+0.0662   & 25   & 2.500 & 89  & 85.0      & 19  & 0       & 1       \\
+0.0347   & 26   & 6.500 & 97  & 87.0      & 14  & 0       & 1       \\
+0.0258   & 28   & 6.600 & 78  & 88.0      & 19  & 0       & 0       \\
+0.0683   & 35   & 6.600 & 113 & 98.0      & 25  & 0       & 1       \\
+0.0373   & 43   & 7.000 & 65  & 107.0     & 20  & 0       & 1       \\
+0.0382   & 53   & 3.600 & 73  & 111.0     & 6   & 1       & 1       \\
+0.0514   & 60   & 4.500 & 134 & 116.7     & 0   & 0       & 1       \\
+0.0342   & 65   & 1.555 & 124 & 119.0     & 9   & 0       & 1       \\
+\bottomrule
+\end{tabular}
+\end{table}
+We find Case 25, 26 and 35 are high studentized residuals cases before and Case 3 as well as 60 are high leverages case we mentioned. Some new cases appear which we find them in studentized residual and leverage plot, all of them have relative high residuals and leverages which are closed with cutoff values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{DFFITs panel}
+Then we will use the other diagnostic to measure influential observations which is closed with Cook's Distance. It is proposed in 1980 by Belsley, Kuh and Welsch and be known as DFFITS. Different from Cook's D, DFFITS tend to measure how the fitted value $\hat{y_i}$ of ith observation be influenced because of ith observation deletion. The value of DFFITS is defined by: \[DFFITS = \frac{\hat{y_i}-\hat{y_{(i)}}}{s_{(i)}-\sqrt{h_{ii}}} = t_{i(i)}\sqrt{\frac{h_{ii}}{1-h_{ii}}}\]
+Hence we can see that DFFITS is related with Cook's D. By the suggestion from Belsley, Kuh and Welsch, we choose the curoff value \[ | DFFITS | = 2 \sqrt{\frac{p}{n}}\] 
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=15cm]{project/figures/dff.pdf}
+    \caption{DFFITs panel}
+    \label{fig:my_label}
+\end{figure}
+
+\noindent
+From Figure 13 we find two more cases than we found by Cook's D measurement---- for Case 80, we have ever discussed it because of high residuals. Case 155 appears firstly so we find it from dataset:
+\begin{table}[!htb]
+\centering
+\begin{tabular}{cccccccc}
+\toprule
+DFFITS & Case & Price & Age & Kilometer & TIA & Extras1 & Extras2 \\
+\midrule
+0.3648 & 155  & 4.200 & 103 & 192       & 26  & 1       & 0       \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+We notice the TIA of 155 is 26, which is extremely high value. Back to scatterplot, we find Case 155 is the only one observation with value 26 in TIA. Combining with leverage plot and studentized residuals plot, we find Case 155 has higher residual and common leverage. Hence, we may think the TIA value which looks like an outlier make case 155 like an influential observations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{DFBETAs panel}
+Also measured by leverage and residual value, in terms of standard deviation units, we will use another measurement DFBETAS. DFBETAS measures the difference in each coefficients estimated with and without the influential point. \[ DFBETAS_{j,i} = \frac{\beta_j-\beta_{j(i)}}{\sqrt{s_{(i)}^2 C_{jj}}}\] where $C_{jj}$ is the jth diagomal element of $(X'X)^{-1}$. \\
+There is a DFBETA for each data point i.e if there are n observations and k variables, there will be $n\times k$ DFBETAs. In general, large values of DFBETAS indicate observations that are influential in estimating a given parameter. Belsley, Kuh, and Welsch recommend 2 as a general cutoff value to indicate influential observations and $\frac{2}{\sqrt{n}}$ as a size-adjusted cutoff. In our figure, we choose $\frac{2}{\sqrt{n}} \approx 0.15$ .
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=16cm]{project/figures/dab.pdf}
+    \caption{DEBETAs under car package}
+    \label{fig:my_label}
+\end{figure}
+From the Figure 14, we find three higher DFBETAS than 0.15. This time, all of three are found before.\\
+
+\noindent
+We collect all of cases together to prepare for refit model with observation deletion.
+\begin{table}[!htb]
+\centering
+\begin{tabular}{ccccc}
+\toprule
+\multicolumn{2}{c}{Outliers}       & \multicolumn{3}{c}{Influential Observations} \\
+\midrule
+Studentized Residuals & Hat-values & Cook's D       & DFFITS       & DFBETAS      \\
+\midrule
+                      &            & 1              & 1            &              \\
+                      \midrule
+                      & 3          & 3              & 3            &              \\
+                      \midrule
+                      & 18         &                & 18           &              \\
+                      \midrule
+25                    &            & 25             & 25           & 25           \\
+\midrule
+26                    &            & 26             & 26           &              \\
+\midrule
+                      &            & 28             & 28           &              \\
+                      \midrule
+35                    &            & 35             & 35           &              \\
+\midrule
+                      &            & 43             & 43           & 43           \\
+                      \midrule
+                      &            & 53             & 53           & 53           \\
+                      \midrule
+                      & 60         & 60             & 60           &              \\
+                      \midrule
+                      &            & 65             & 65           &              \\
+                      \midrule
+80                    &            &                & 80           &              \\
+\midrule
+
+                      &            &                & 155          &              \\
+                      \midrule
+                      & 167        &                &              &              \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\noindent
+Combining the output of outliers and influential observations, we decide to remove cases 25, 35 and 60. From the model, we want to find a well way to predict the price of pre-owned automobiles. By summary output of full model, we know two significant predictors are age and kilometers, so we would like to pay more attention to this two characteristics in practice. Case 25 and 35 are outliers which are far from the best fitted linear model in bivariate plot of price against age as well as kilometers. It means they are some special and uncommon situation for prediction of price. Then we want to delete them. For case 60, it is an extreme case that the number of months to next appointment with TIA is 0. In fact, it is impossible for owner resell a vehicle which is on the way to take an inspection. Besides, the Cook's D of case 60 is the third high value, which has both high studentized residual and high leverage. We would like to remove it as well. By refitting model, we get a new summary output as below:\\
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=12cm]{project/figures/new_model_summary.png}
+    \caption{New Model Removed Case 25, 35 and 60 Summary Output}
+    \label{3}
+\end{figure}
+
+\noindent
+THere is one more change that the significance level of predictor "Extras1" increases. Back to boxplot of price against this predictor, we find the vehicles with ABS brake is definitely more expensive than them without ABS. We are happy to see this change. Futherore, the increasing Multiple R-squared of refitted model means the model has a better goodness-of-fit and the increasing F-statistic shows us the combination of 5 predictors now give a more information to prediction of response.\\
+
+\noindent
+According to new output we gain a new refitted model
+\[Y=9.408966-0.040007X_1-0.009419X_2-0.003967X_3-0.203448X_4-0.025166X_5\]
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\section{Variable Selecting}
+When we make modeling and analysis, we find unimportant variables inside the input variables that can decrease precision and complicate interpretations of the study, so we want to select a best or a better subset of input variables that are important and sufficient for linear regression modeling.[3] \\
+
+\noindent
+For a full model with p predictors, we know that 
+\begin{equation*}
+\begin{aligned}
+  \hat{\bm{\beta}}_p & = (\hat{\textbf{X}}_p'\hat{\textbf{X}}_p)^{-1}\hat{\textbf{X}}_p'\textbf{y} \\ 
+  \hat{\bm{\sigma}}_p & = \frac{1}{n-p-1}SSE_{p}
+\end{aligned}
+\end{equation*}
+
+\noindent
+If we choose d predictors from the whole set of p predictors, we obtained:
+\begin{equation*}
+\begin{aligned}
+  \hat{\bm{\beta}}_d & = (\hat{\textbf{X}}_d'\hat{\textbf{X}}_d)^{-1}\hat{\textbf{X}}_d'\textbf{y} \\ 
+  \hat{\bm{\sigma}}_d & = \frac{1}{n-d-1}SSE_{d}
+\end{aligned}
+\end{equation*}
+
+\noindent
+We assume d$<$p, which is to say that the full model is not equal the selected model. There are some properties from comparison with these two models [4]:
+\begin{itemize}
+    \item When the correlation coefficients between $x_j$ and $x_{d+1}$, ..., $x_p$ are all-zero, the least squared estimator of selected model is a biased estimator of corresponding estimator of full model;
+    \item The prediction of selected model is biased compared with the full model;
+    \item The variance of estimated parameters of selected model is smaller than it of full model;
+    \item The variance of predicting residuals of selected model is smaller than it of full model;
+    \item We assume $\bm{\beta}_{p-d}$ = $(\beta_{d+1}, ..., \beta_p)$, the least squared estimation using full model of $\bm{\beta}_{p-d}$ is $(\hat{\beta}_{d+1}, ..., \hat{\beta}_p)$. Under the condition of Var($\bm{\beta}_{p-d}$) $\geq$ $\bm{\beta}_{p-d}$ $\bm{\beta}_{p-d}'$, the mean-square error of prediction by selected model is less than MSE of prediction using full model.
+\end{itemize}
+The first 2 properties show us the disadvantages of using selected model to take the place of full model and the third and forth properties show us the advantages of selected model instead of full model. The last property indicates: although the full model is unbiased, while there maybe some predictors are not significant for response and, with biased prediction using selected model, we improve the prediction accuracy. Hence the selection of variance is important and necessary, we need to try our best to keep less and more significant predictors to obtain trade-off between the quality and stability of models.
+
+
+
+
+
+
+
+\subsection{Subset Selection}
+\subsubsection{Best Subset Selection}
+Best Subset Selection is a method to fit models by each of predictors along, fit models all possible combinations of 2 predictors from all of predictors, then, fit models all possible combinations of 3 predictors, and so forth. Finally, we want to find the best model from $\sum_{k=1}^{p}\binom{p}{k}$ models. To choose the optimal model, we introduce several criterion.\\
+
+\subsubsection{Several Criterion for Variables Slection}
+
+
+\noindent
+\textbf{Akaike information criterion}
+In general, \[AIC = 2d - 2ln(\hat{L})\] where d is number of independently adjusted parameters within the model and the $\hat{L}$ is the maximum likelihood function values for the model.[5] For linear model, $- 2ln(\hat{L})$ is computed from the Deviance which is the same role as SSE in models. AIC deals with the trade-off between the goodness of fit of the model and the simplicity of the model. In other words, AIC deals with both the risk of overfitting and the risk of underfitting. And the smaller the AIC of subset is, the better the regression model fit.\\ 
+
+
+\noindent
+\textbf{Bayesian information criterion}\\
+The BIC has a very similar formula as AIC with a little difference in penalty part:
+\[BIC = ln(n)d - 2ln(\hat{L})\]
+This approach is more affected by the size of model. And we do also want to find the smallest BIC.\\
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsubsection{Stepwise Regression}
+While for computational reasons, best subset selection cannot be use in practical. Hence, we choose the other method which is know as Stepwise Selection. For stepwise regression, we need to build a model firstly, and then, add or delect predictors. There are three different stepwise method: Forward, Backward and Hybrid. It is not hard to consider:\\ 
+\begin{itemize}
+    \item Forward Stepwise : In an null regression (with only intercept), add predictors one time each until the additional contribution (AIC value) of any variable is not statistically significant (will not make AIC decrease), then stop. (p $>>$ n can be used)
+    \item Backward Stepwise : After fitting a full regression (with all p predictors), remove least useful predictors one time each. (n $>$ p can be used)
+    \item Hybrid : The combination of above two approachs: predictors are added sequentially like forward stepwise one time each, and after every adding of new predictor, predictors providing no improvement in the model fitting will be remove.
+\end{itemize}
+
+\noindent
+\textbf{Using R to find the optimal model}\\
+Now we know the procedure of variable selection, we will use R to find the best subset selection.  There are two ways (functions) introduced as followed.\\
+
+\noindent
+The first one is to use regsubsets() function with "forward" method which is in leaps package. The summary.regsubsets includes SSR, $R^2$, $C_p$, BIC and so on, while there is no AIC. Hence we extract the results of BIC to play the role of AIC.\\
+
+\begin{verbatim}
+> regfit.fwd<-regsubsets(price~.,data=DS.5,method ="forward")
+> regfit.fwd.sum<-summary(regfit.fwd)
+> regfit.fwd.sum
+Subset selection object
+Call: regsubsets.formula(price ~ ., data = DS.5, method = "forward")
+5 Variables  (and intercept)
+          Forced in Forced out
+age           FALSE      FALSE
+kilometer     FALSE      FALSE
+TIA           FALSE      FALSE
+extras1       FALSE      FALSE
+extras2       FALSE      FALSE
+1 subsets of each size up to 5
+Selection Algorithm: forward
+         age kilometer TIA extras1 extras2
+1  ( 1 ) "*" " "       " " " "     " "    
+2  ( 1 ) "*" "*"       " " " "     " "    
+3  ( 1 ) "*" "*"       " " "*"     " "    
+4  ( 1 ) "*" "*"       "*" "*"     " "    
+5  ( 1 ) "*" "*"       "*" "*"     "*"    
+
+> fwd.sum<-data.frame(regfit.fwd.sum$outmat,Adjusted_R_square=regfit.fwd.sum$adjr2,BIC=regfit.fwd.sum$bic,Cp=regfit.fwd.sum$cp)
+> fwd.sum
+         age kilometer TIA extras1 extras2 Adjusted_R_square       BIC        Cp
+1  ( 1 )   *                                       0.5071767 -112.4218 47.811218
+2  ( 1 )   *         *                             0.6105227 -148.7684  3.551917
+3  ( 1 )   *         *           *                 0.6154363 -146.8254  2.422241
+4  ( 1 )   *         *   *       *                 0.6141034 -142.1097  4.005040
+5  ( 1 )   *         *   *       *       *         0.6117905 -136.9674  6.000000 
+\end{verbatim}
+
+\noindent
+According to first summary result, we can find the best one-variable model is price~age, the best two-variable model is price~age+kilometer as well as three to five. Since we use forward method, R shows us from the model with only the mean of response observations, adding of variable age of cars in months makes model to gain smallest BIC -112.4218. Then, by adding of variable kilometer reading, BIC of two-variable model reach the smalles BIC -148.7684. Hence, the optimal subset selection based on minimum BIC is two-variable model of ages, kilometers. While we can find the BIC value of the best two-variable model is a little difference from the value of best three-variable model with extras1 more which is -146.8254. And what is wondered that when we consider the maximum adjusted $R^2$ or the minimum $C_p$, the optimal model turns to best three-variable model. We obtain that under different criterion, we will choose the different optimal sunset selection. While why the difference exist? \\
+
+
+
+
+
+
+
+
+\noindent
+R do also provides fuction step() which is under AIC criterion with \[AIC = - 2 \times log L + k \times edf\] where L is the likelihood and edf is the equivalent degrees of freedom (i.e., the number of free parameters for usual parametric models) of fit. We do also do the forward stepwise. R decide to add variables to obtain the minimum AIC values step-by-step.\\
+
+\begin{verbatim}
+> forward.lm=step(null,
++                 scope = list(lower=null,upper=full),
++                 direction = "forward")
+Start:  AIC=76.69
+price ~ 1
+
+            Df Sum of Sq    RSS     AIC
++ age        1   135.435 130.09 -44.030
++ kilometer  1    88.086 177.44   9.357
++ extras2    1     3.663 261.86  76.297
+<none>                   265.53  76.686
++ TIA        1     0.286 265.24  78.501
++ extras1    1     0.257 265.27  78.520
+
+Step:  AIC=-44.03
+price ~ age
+
+            Df Sum of Sq    RSS     AIC
++ kilometer  1   27.8855 102.21 -83.524
++ extras1    1    2.0038 128.09 -44.700
+<none>                   130.09 -44.030
++ extras2    1    0.5429 129.55 -42.750
++ TIA        1    0.1996 129.89 -42.294
+
+Step:  AIC=-83.52
+price ~ age + kilometer
+
+          Df Sum of Sq    RSS     AIC
++ extras1  1   1.88660 100.32 -84.729
+<none>                 102.21 -83.524
++ TIA      1   0.09055 102.12 -81.677
++ extras2  1   0.02798 102.18 -81.572
+
+Step:  AIC=-84.73
+price ~ age + kilometer + extras1
+
+          Df Sum of Sq    RSS     AIC
+<none>                 100.32 -84.729
++ TIA      1  0.251492 100.07 -83.161
++ extras2  1  0.009439 100.31 -82.745
+\end{verbatim}
+
+\noindent
+According to this function, we notice that although the AIC and BIC is almost similar while the optimal subset selection under them are different seperately. The procedure is similar as above. Beginning with null model without variables. R compares AIC values of all situations including "$<$none$>$" which means do nothing. Step 1 shows us if we add variable age, model will reach smallest AIC = -44.030. Then, by adding kilometer, AIC decrease most to -83.524. From step 3, we find the top two behaviour adding extras1 and doing nothing get very closed AIC -84.729 and -83.524 seperately. It indicates the variable extras1 makes AIC more smaller but not so efficiently compared with first two step. Finally, we investigate the "$<$none$>$" term appears at the top. Till step 4, we would better to add no more variables to reach the smalles AIC -84.729. We obtain the optimal subset selection of variables included ages, kilometer and extras1 by forward stepwise approach using AIC criterion. According to this result, we notice that although the AIC and BIC is almost similar function while the optimal subset selection under them are different respectively.\\
+
+
+
+\noindent
+By the algorithm of forward, backward and hybrid stepwise selection, disadvantages of forward and backward are obvious: both of them are "Lifelong Principle" for variables, which is to say, as long as one of predictor is added into (removed out of) model, it will have no chance to leave (come back). While there may be a situation like if one of predictor is added into model to gain smaller AIC, after adding the other predictor, removing the previous predictor will decrease the AIC. To solve such as shorting of one-side stepwise selection, we will try the hybrid selection whose principle is combining adding and removing at the same time. 
+
+
+
+\noindent
+For Hybrid Stepwish:
+
+
+\begin{verbatim}
+> null<-lm(price~1,data = DS.5)
+> full<-lm(price~.,data = DS.5)
+> best_fit<-step(null,scope = list(lower=null,upper=full),
++                    scale=0,direction="both")
+Start:  AIC=76.69
+price ~ 1
+
+            Df Sum of Sq    RSS     AIC
++ age        1   135.435 130.09 -44.030
++ kilometer  1    88.086 177.44   9.357
++ extras2    1     3.663 261.86  76.297
+<none>                   265.53  76.686
++ TIA        1     0.286 265.24  78.501
++ extras1    1     0.257 265.27  78.520
+
+Step:  AIC=-44.03
+price ~ age
+
+            Df Sum of Sq    RSS     AIC
++ kilometer  1    27.886 102.21 -83.524
++ extras1    1     2.004 128.09 -44.700
+<none>                   130.09 -44.030
++ extras2    1     0.543 129.55 -42.750
++ TIA        1     0.200 129.89 -42.294
+- age        1   135.435 265.53  76.686
+
+Step:  AIC=-83.52
+price ~ age + kilometer
+
+            Df Sum of Sq    RSS     AIC
++ extras1    1     1.887 100.32 -84.729
+<none>                   102.21 -83.524
++ TIA        1     0.091 102.12 -81.677
++ extras2    1     0.028 102.18 -81.572
+- kilometer  1    27.886 130.09 -44.030
+- age        1    75.234 177.44   9.357
+
+Step:  AIC=-84.73
+price ~ age + kilometer + extras1
+
+            Df Sum of Sq    RSS     AIC
+<none>                   100.32 -84.729
+- extras1    1     1.887 102.21 -83.524
++ TIA        1     0.251 100.07 -83.161
++ extras2    1     0.009 100.31 -82.745
+- kilometer  1    27.768 128.09 -44.700
+- age        1    76.600 176.92  10.852
+\end{verbatim}
+From above result, the difference on process of forward and hybrid is showed clear. During each of step, every variables outside model may be added into model and every variables included by model is possible to delete as long as that it can results in decreading of AIC. We find the optimal model obtains predictors age, kilometer as well as extras1. It is the same model as above. For further analysis, we summary the reduced model to predict response sales price using predictors age, kilometer and whether pre-owned automobiles have sunroof or not.\\
+
+
+
+
+\begin{verbatim}
+> summary(lm(price~age+kilometer+extras1,data=DS.5))
+
+Call:
+lm(formula = price ~ age + kilometer + extras1, data = DS.5)
+
+Residuals:
+     Min       1Q   Median       3Q      Max
+-2.46505 -0.47163 -0.00206  0.49245  2.68155
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  9.206003   0.377342  24.397  < 2e-16 ***
+age         -0.038311   0.003383 -11.326  < 2e-16 ***
+kilometer   -0.009780   0.001434  -6.819 1.58e-10 ***
+extras1     -0.226358   0.127350  -1.777   0.0773 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7728 on 168 degrees of freedom
+Multiple R-squared:  0.6222, Adjusted R-squared:  0.6154
+F-statistic: 92.22 on 3 and 168 DF,  p-value: < 2.2e-16
+
+\end{verbatim}
+
+\noindent
+We analyse the output of R above as normal to investigate the relationship between the predictors and response in new model. Beginning with the Residuals of reduced model: both of the median residual -2.46505 and estimated variance of the random error $(0.7728)^2$ of reduced model are a little smaller than full model(the standard error is larger while closer with 0). Looking at results of F statistic, both p-value of full model and reduced model are much smaller than 0.05. Hence we think both of two model are significant. Multiple $R^2$ 0.6222 which is defined as fraction of variance explained by model is a little smaller than full model. Adjusted 0.6154 $R^2$ which is closed $R^2$ but penalized for higher p (number of predictors) is increased than full model. Both of them are based on variance, while the different reaction of variable selection explains that removing several non-significant variables will improve the efficiency of regression model. It is more focus on contribution of each of variables and manage to complete simplification the model, improvement of accuracy as well as reduction of overfitting.\\
+
+\noindent
+Then, about the "Estimate" term of Coefficients Matrix, all of regression coefficients (including intercept) do also have no large changes. All of three coefficients of two numerical variables and one categorical variable are negative. With one unit increase of age, the price will decrease approximate 0.04 unit. With one more unit kilometer reading by car, the resale price do also decrease in less than 0.01 unit. If the vehicle has no ABS brake, it will be sell in price 0.23 unit lower than vehicle with ABS brake. Although it seems not a large affect. While the unit of price is in 1000 pounds. Hence for those owner of one months younger pre-owned vehicles, they will be paid 40 pounds more. The unit of kilometer reading is in 1000 as well, so if the vehicles display 1000 kilometers reading less, it worth more about 10 pounds. The most obvious influence is whether the vehicles have ABS brake, the price spread is \pounds 220-230. While it is worthy because it causes improvement and more guarantee of safety.\\
+
+\noindent
+Finally, we look at the last column as well as star column. The values indicate the result of t statistics which does hypothesis test to check are coefficient of determination of corresponding variable likely to be zero. If the coefficient of determination is zero, we will think any value changing of this variable will not influence the response and it is not meaningful to explore it in regression model. At first, two numerical variables correspond extremely small p-value and are considered by significant. Difference appears in variable extras1. In the output of full model, extras1 does not pass the significance test with p-value of 0.0683. In reduced model, p-value here is 0.0773 which is stll not significant under level of 0.05 and even is much high than before. Hence, we try to delete variable extras1 as well.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{verbatim}
+> summary(lm(price~age+kilometer,data=DS.5))
+
+Call:
+lm(formula = price ~ age + kilometer, data = DS.5)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-2.2999 -0.4926 -0.0316  0.4838  2.8362
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  9.002577   0.361857   24.88  < 2e-16 ***
+age         -0.037861   0.003395  -11.15  < 2e-16 ***
+kilometer   -0.009800   0.001443   -6.79 1.82e-10 ***
+---
+Signif. codes:  
+0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.7777 on 169 degrees of freedom
+Multiple R-squared:  0.6151, Adjusted R-squared:  0.6105
+F-statistic:   135 on 2 and 169 DF,  p-value: < 2.2e-16
+
+\end{verbatim}
+This time, we get all predictors are significant. While we obtain both smaller $R^2$ and Adjusted $R^2$ but larger variance of residuals $(0.7777)^2$. We think the deletion of extras1 doesn't hold better trade-off between quality and parsimony of model fitting. It is an overfitting model. And we will prefer the three-variable model \[y = 9.206003 - 0.038311x_1 - 0.009780x_2 + 0.226358x_4\] 
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Penalized Regression}
+
+\subsubsection{Ridge Regression}
+
+\textbf{Collinearity}\\
+For a linear model \[\textbf{Y}=\beta_0 + \beta_1 \textbf{X}_1 + \beta_2 \textbf{X}_2 + ... + \beta_p \textbf{X}_p + \epsilon\] The mean of squared error MSE of estimated coefficients of determination is defined as \[MSE(\hat{\beta}) = E(\hat{\beta}-\beta)^T(\hat{\beta}-\beta) = \sigma^2 \sum_{i=1}^{p} \frac{1}{\lambda_i}\] where $\lambda_1$, ..., $\lambda_p$ $>$ 0 are eigen values of $\textbf{X}^T\textbf{X}$. If there is an eigen-value closed with 0, the MSE of estimated coefficient will be infinite. The estimator is considered be bad one. Hence if we want to examine whether the model is a good estimator for regression coefficients, we need to prove there is no eigen-value closed to zero. In linear algebra, if there is an 0 eigen-value, at least a couple of column vectors exist approximate linear relationship. Now, we will try to calculate the all eigen-values of our dataset. After some calculation in R, we find the minimum eigen-value of our design matrix is larger than 30. Combining the scatter plot of before, we think there don't exist obvious collinearity between our predictors.\\
+
+\noindent
+As a penalized regression approach, ridge regression do better when predictors are multicollinearity. While ridge regression is not able to do variable selection since the final model after estimation always include p predictors. None of coefficients of predictor in ridge regression can be zero.[6]. Hence we will not discuss this approach.
+
+
+
+\begin{verbatim}
+##### Build up Matrices
+> x = model.matrix(price~., DS.5)[, -1]
+> y = DS.5$price
+
+
+##### Fit a ridge regression model with alpha=0 and choose a range of lambda
+> grid = 10^seq(10, -2, length =100)
+> ridge.mod = glmnet (x, y, alpha =0, lambda=grid)
+
+
+##### Using 10-folds cross-validation to find the best lambda 
+> set.seed (1)
+> train=sample (1: nrow(x), nrow(x)/2)
+> test=(- train )
+> y.test=y[test]
+
+> cv.out =cv.glmnet (x[train ,],y[train],alpha =0)
+> bestlam =cv.out$lambda.min
+> bestlam
+[1] 0.09444459
+
+
+##### Using the chosen lambda to estimate coefficients
+> out=glmnet (x,y,alpha =0)
+> predict (out ,type="coefficients",s=bestlam )[1:6,]
+ (Intercept)          age    kilometer          TIA      extras1      extras2 
+ 8.966733588 -0.035819214 -0.009415690 -0.004893544 -0.211036758 -0.025694433 
+\end{verbatim}
+
+
+
+
+
+
+
+
+
+\subsubsection{Lasso Regression}
+Other than ridge regression, we will introduce the other penalized regression ---- Lasso Regression with $\textit{l}_1$ penalty which need to minimized the quantity \[RSS + \lambda \sum_{j=1}^{p}|\beta_j|\] In the case of the lasso, the $\textit{l}_1$ penalty has the effect of forcing some of the coefficient estimates to be exactly equal to zero when the tuning parameter $\lambda$ is sufficiently large. Hence, much like best subset selection, the lasso performs variable selection.[6] How can we find the best $\lambda$?\\
+
+\noindent
+\textbf{Cross-Validation and K-Fold Cross-Validation}\\
+From the book [6, Chapter 5.], we introduce cross-validation methods, as shown below.\\
+According to the data we collected, we divide them into two parts. One part, called the training set, is used to train or fit our model, and the other part of the data is used to test how our model works. We can then repeat this process several times until all the data allocation methods are used up. Then, we can use the mean of the model test errors in the repeated model fitting process to evaluate the model.\\
+
+\noindent
+Cross-validation (also known as rotational estimation) is a method of evaluating the accuracy of statistical models based on training and test data sets (we divide the entire data set into two parts: training data set and test data set). Typically, models are trained or tested based on training data sets, and we can use fitting models to predict the response of explanatory variable values to test data. In this way, we can obtain the test error rate according to the training set to prove the accuracy of the fitting model.\\
+
+\noindent
+For the following calculation, we will discuss one of approach basing on Cross-validation ---- K-Fold Cross-Validation. Differing from splitting all observations into two set we mention above, under K-Fold, we will separates the whole dataset average into K groups. Every time we pick one group data to be the test data and the remaining data are regarded as the training data to train the model. We will examine test error by \[CV_{(K)} = \frac{1}{K} \sum_{i=1}^{K}MSE(i)\]
+
+
+
+\begin{verbatim}
+##### Build up Matrices
+> x_vars <- model.matrix(price~. ,DS.5)[,-1]
+> y_var <- DS.5$price
+> lambda_seq <- 10^seq(2, -2, by = -.1)
+
+
+##### Using 10-folds cross-validation to find the best lambda 
+> set.seed(914)
+> train = sample(1:nrow(x_vars), nrow(x_vars)/2)
+> test=(-train)
+> y_test = y_var[test]
+
+> cv_output <- cv.glmnet(x_vars[train,], y_var[train], 
++             alpha = 1, lambda = lambda_seq)
+> best_lam <- cv_output$lambda.min
+> lasso_best <- glmnet(x_vars[train,], y_var[train], alpha = 1, lambda = best_lam)
+
+
+##### Using the chosen lambda to estimate coefficients
+> lasso.coef=predict(lasso_best,type="coefficients",s=best_lam)[1:6,]
+> lasso.coef
+ (Intercept)          age    kilometer          TIA      extras1      extras2 
+ 7.946660065 -0.030203538 -0.008699517 -0.002647472  0.000000000 -0.000000000  
+
+
+##### Variables Selection
+> lasso.coef[lasso.coef!=0]
+ (Intercept)          age    kilometer          TIA 
+ 7.946660065 -0.030203538 -0.008699517 -0.002647472 
+
+\end{verbatim}
+From the result of Lasso Regression, we obtain a complete new result: a three-variable with predictors age, kilometers and TIA. Since each time, we will generate different training and test set. And the default algorithm of R is 10-fold Cross-Validation. We refit model for 2 more times. 
+
+\begin{verbatim}
+> x_vars <- model.matrix(price~. ,DS.5)[,-1]
+> y_var <- DS.5$price
+> lambda_seq <- 10^seq(2, -2, by = -.1)
+
+> set.seed(9014)
+> train = sample(1:nrow(x_vars), nrow(x_vars)/2)
+> test=(-train)
+> y_test = y_var[test]
+
+> cv_output <- cv.glmnet(x_vars[train,], y_var[train], 
++             alpha = 1, lambda = lambda_seq)
+> best_lam <- cv_output$lambda.min
+> best_lam
+[1] 0.1
+
+> lasso_best <- glmnet(x_vars[train,], y_var[train], alpha = 1, lambda = best_lam)
+> lasso.coef=predict(lasso_best,type="coefficients",s=best_lam)[1:6,]
+> lasso.coef
+ (Intercept)          age    kilometer          TIA      extras1      extras2 
+ 8.871917609 -0.036883362 -0.009660747  0.000000000  0.000000000  0.000000000 
+
+
+
+> x_vars <- model.matrix(price~. ,DS.5)[,-1]
+> y_var <- DS.5$price
+> lambda_seq <- 10^seq(2, -2, by = -.1)
+
+> set.seed(90014)
+> train = sample(1:nrow(x_vars), nrow(x_vars)/2)
+> test=(-train)
+> y_test = y_var[test]
+
+> cv_output <- cv.glmnet(x_vars[train,], y_var[train], 
++             alpha = 1, lambda = lambda_seq)
+> best_lam <- cv_output$lambda.min
+> best_lam
+[1] 0.01
+
+> lasso_best <- glmnet(x_vars[train,], y_var[train], alpha = 1, lambda = best_lam)
+> lasso.coef=predict(lasso_best,type="coefficients",s=best_lam)[1:6,]
+> lasso.coef
+ (Intercept)          age    kilometer          TIA      extras1      extras2 
+ 9.179603560 -0.038076875 -0.008907225 -0.011570262 -0.268316574  0.108004592 
+
+\end{verbatim}
+Combining three results, we find that the larger $\lambda$ we set, the smaller the coefficients are, and the less variables will be included. When we choose $\lambda = 0.1$, we obtain a two-variable model. However $\lambda$ is define by 0.01, a similar model as full model basing on least square estimation is generated.
+
+
+
+
+
+
+
+
+
+%% Validation set approachs and Cross-Validation
+% While before the beginning, we will introduce Validation Set Approach in this case. As we know, the full model compared with subset selection model is a lower RSS as well as higher $R^2$. Hence the full model always has lower training error which is defined as the error we obtained by putting our old training data into the trained model. However, as a model whose funtion is prediction, we hope we obtain a lower test error which is generated by putting new observations into fitted model. Based on the request of accurancy, we will use the Validation Set Approach: we will split the whole observation set into two set----a training data-set and a test data-set.
+
+
+
+
+%\begin{figure}[!htb]
+%    \centering
+%    \includegraphics[width=12cm]{project/kilovsP.pdf}
+%    \caption{kilometers vs Price}
+%    \label{8}
+%\end{figure}
+
+%\begin{figure}[!htb]
+%    \centering
+%    \includegraphics[width=12cm]{project/TIAvsP.pdf}
+%    \caption{TIA vs Price}
+%   \label{9}
+%\end{figure}
+
+%\begin{figure}[!htb]
+%    \centering
+%    \includegraphics[width=12cm]{project/ABSvsP.pdf}
+%    \caption{ABS brake or not vs Price}
+%    \label{10}
+%\end{figure}
+
+%\begin{figure}[!htb]
+%    \centering
+%    \includegraphics[width=12cm]{project/sunroofvsP.pdf}
+%    \caption{Sunroof or not vs Price}
+%    \label{11}
+%\end{figure}
+
+\section{Reference}
+[1] William S. Cleveland (1979) Robust Locally Weighted Regression and
+Smoothing Scatterplots, Journal of the American Statistical Association, 74:368, 829-836\\
+
+\noindent
+[2] Belsley, David A.; Kuh, Edwin; Welsh, Roy E. (1980). Regression Diagnostics: Identifying Influential Data and Sources of Collinearity. Wiley Series in Probability and Mathematical Statistics. New York: John Wiley \& Sons. pp. 11–16. ISBN 0-471-05856-4.\\
+
+\noindent
+[3] Toshie Yamashita , Keizo Yamashita \& Ryotaro Kamimura (2007) A Stepwise AIC Method for Variable Selection in Linear Regression, Communications in Statistics - Theory and Methods, 36:13, 2395-2403, DOI: 10.1080/03610920701215639\\
+
+\noindent
+[4] Xi-Ru, Chen, and Wang Song-Gui. (1987). "Modern regression analysis." Hefei: Publishing House of Anhui Education.(in Chinese)\\
+
+\noindent
+[5] Akaike, H. (1974), "A new look at the statistical model identification", IEEE Transactions on Automatic Control, 19 (6): 716–723, doi:10.1109/TAC.1974.1100705, MR 0423716.\\
+
+\noindent
+[6] Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani. (2013). An introduction to statistical learning : with applications in R. New York :Springer. http://www.springer.com/series/417\\
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
