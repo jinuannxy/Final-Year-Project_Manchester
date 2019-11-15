@@ -4,8 +4,6 @@ Topic: Normal linear model checking
 
 Time: 19/20
 
-Introduction: 
+Introduction: The article are typed in via LaTeX. Related data analysis and algorithm are via R. 
 
-The article are typed in via LaTeX. Related data analysis and algorithm are via R. 
-
-
+Data: From my supervisor Dr. Peter Foster. Simulation data.
